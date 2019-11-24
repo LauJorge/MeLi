@@ -3,9 +3,13 @@ package MercadoLibre.src.com.company;
 public class Mutant {
 
     public static void main(String[] args) {
-        String[] dna = {"ATGCGA", "AAGTGC", "CTATGT", "AACAGG", "GGCCTA", "TCACTG"};
-        boolean mutant = isMutant(dna);
+        String[] dna = {"ATGCCA", "AAGTCC", "CTACGT", "AACAGG", "GGCCCA", "TCCATG"};
 
+        //imprime matriz generada
+        char[][] matrix = createMatrix(dna);
+        printMatrix(dna, matrix);
+
+        boolean mutant = isMutant(dna);
         if (mutant) System.out.println("\n\n:::: MUTANTE DETECTADO ::::");
         else System.out.println("\n\nEste humano no es mutante");
     }
@@ -19,11 +23,15 @@ public class Mutant {
         //verifica hallazgo vertical
         boolean vertical = validateVertical(dna);
         if (vertical) return true;
-        //verifica hallazgo horizontal en cada
+        //verifica hallazgo horizontal
         for (int i = 0; dna.length > i; i++) {
             boolean horizontal = validateHorizontal(dna[i]);
             if (horizontal) return true;
         }
+        //verifica hallazgo oblicuo
+        boolean diagonal = validateDiagonal(dna);
+        if (diagonal)return true;
+
         return false;
     }
 
@@ -71,6 +79,34 @@ public class Mutant {
 
     /**
      * @param dna
+     * @return boolean
+     * Valida que un ADN coincida en forma oblicua
+     */
+    public static boolean validateDiagonal(String[] dna) {
+        char[][] matrix = createMatrix(dna);
+        int letterCounter = 1;
+
+        for (int i = 0; i < dna.length; i++) {
+            for (int j = 0; j < dna.length; j++) {
+                //compara consecutivas desde la segunda posición
+                if (j == 0) continue;
+                if (i == 0) continue;
+
+                //resetea contado si la letra de arriba no es igual a la de abajo
+                if (matrix[j][i] == matrix[j][i - 1]) {
+                    System.out.println(matrix[j][i - 1]);
+                    letterCounter++;
+                } else letterCounter = 1;
+
+                //finaliza como verdadero si hay 4 letras iguales consecutivas
+                if (letterCounter == 4) return true;
+
+            }
+        }
+        return false;
+    }
+    /**
+     * @param dna
      * @return char[][]
      * Crea una matriz con los datos ingresados
      */
@@ -83,8 +119,6 @@ public class Mutant {
                 matrix[i][j] = dna[i].toCharArray()[j];
             }
         }
-        //imprime matriz generada
-        printMatrix(dna, matrix);
         return matrix;
     }
 
