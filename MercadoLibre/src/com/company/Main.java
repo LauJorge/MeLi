@@ -69,10 +69,10 @@ public class Main {
             }
             else{
             for (int j = 0; j < dna[0].length(); j++) {
-                if ((dna[i].toCharArray()[j] == 'A' || dna[i].toCharArray()[j] == 'T' || dna[i].toCharArray()[j] == 'C' || dna[i].toCharArray()[j] == 'G')){
-                    System.out.println("caracter invalido");
-                    break;
-                }
+//                if ((dna[i].toCharArray()[j] == 'A' || dna[i].toCharArray()[j] == 'T' || dna[i].toCharArray()[j] == 'C' || dna[i].toCharArray()[j] == 'G')){
+//                    System.out.println("caracter invalido");
+//                    break;
+//                }
                 matrix[i][j] = dna[i].toCharArray()[j];
             }
                 printMatrix(dna, matrix);
@@ -82,6 +82,11 @@ public class Main {
         return matrix;
     }
 
+    /**
+     * @param dna
+     * @param matrix
+     * imprime matriz
+     */
     private static void printMatrix(String[] dna, char[][] matrix) {
         for (int i = 0; i < dna.length; i++) {
             System.out.println("");
