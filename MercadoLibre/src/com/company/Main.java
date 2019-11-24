@@ -54,6 +54,11 @@ public class Main {
         return 0;
     }
 
+    /**
+     * @param dna
+     * @return
+     * Crea una matriz con los datos ingresados
+     */
     private static char[][] createMatrix(String[] dna) {
         char[][] matrix = new char[dna.length][dna.length];
 
