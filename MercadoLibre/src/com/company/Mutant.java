@@ -7,6 +7,8 @@ public class Mutant {
     public static void main(String[] args) {
        // String[] dna = {"ATGCCA", "AAGTAC", "CTACGT", "AACAGG", "GGCCCA", "TCCATG"};
         String[] dna = getDna();
+       if(!validateImput(dna)) System.exit(0);
+
 
         //imprime matriz generada
         char[][] matrix = createMatrix(dna);
@@ -149,5 +151,18 @@ public class Mutant {
             }
         }
     }
+
+    static boolean validateImput(String[] dna){
+        int largo = dna.length;
+
+        for (int i = 0; i < largo; i++) {
+            if ((!dna[i].contains("A") || !dna[i].contains("T")||!dna[i].contains("C") || !dna[i].contains("G"))){
+                System.out.println("EERROR: Los carácteres ingresados no son válidos.");
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
 
