@@ -3,7 +3,7 @@ package MercadoLibre.src.com.company;
 public class Mutant {
 
     public static void main(String[] args) {
-        String[] dna = {"ATGCCA", "AAGTCC", "CTACGT", "AACAGG", "GGCCCA", "TCCATG"};
+        String[] dna = {"ATGCCA", "AAGTAC", "CTACGT", "AACAGG", "GGCCCA", "TCCATG"};
 
         //imprime matriz generada
         char[][] matrix = createMatrix(dna);
@@ -88,18 +88,19 @@ public class Mutant {
 
         for (int i = 0; i < dna.length; i++) {
             for (int j = 0; j < dna.length; j++) {
-                //compara consecutivas desde la segunda posición
                 if (j == 0) continue;
                 if (i == 0) continue;
-
-                //resetea contado si la letra de arriba no es igual a la de abajo
-                if (matrix[j][i] == matrix[j][i - 1]) {
-                    System.out.println(matrix[j][i - 1]);
+                //compara con la posicion superior izquierda
+                if (matrix[i - 1][j - 1] == matrix[i][j]) {
+                    letterCounter++;
+                } else letterCounter = 1;
+                //compara con la posicion superior derecha
+                if (matrix[i + 1][j - 1] == matrix[i][j]) {
                     letterCounter++;
                 } else letterCounter = 1;
 
                 //finaliza como verdadero si hay 4 letras iguales consecutivas
-                if (letterCounter == 4) return true;
+                if (letterCounter == 3) return true;
 
             }
         }
