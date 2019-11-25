@@ -129,8 +129,13 @@ public class Mutant {
         char[][] matrix = new char[dna.length][dna.length];
         for (int i = 0; i < dna.length; i++) {
             for (int j = 0; j < dna[0].length(); j++) {
-                //completa la matriz con el dna
-                matrix[i][j] = dna[i].toCharArray()[j];
+                if(dna[i].length() == dna[j].length()){
+                    //completa la matriz con el dna
+                    matrix[i][j] = dna[i].toCharArray()[j];
+                } else {
+                    System.out.println("ERROR: EL tamaño de la matriz es incorrecto");
+                    System.exit(0);
+                }
             }
         }
         return matrix;
@@ -152,11 +157,16 @@ public class Mutant {
         }
     }
 
+    /**
+     * @param dna
+     * @return boolean
+     * validates if the imput only has valid chars
+     */
     static boolean validateImput(String[] dna){
         int largo = dna.length;
 
         for (int i = 0; i < largo; i++) {
-            if ((!dna[i].contains("A") || !dna[i].contains("T")||!dna[i].contains("C") || !dna[i].contains("G"))){
+            if (!(!dna[i].contains("A") || !dna[i].contains("T")||!dna[i].contains("C") || !dna[i].contains("G"))){
                 System.out.println("EERROR: Los carácteres ingresados no son válidos.");
                 return false;
             }
