@@ -1,17 +1,33 @@
 package MercadoLibre.src.com.company;
 
+import java.util.Scanner;
+
 public class Mutant {
 
     public static void main(String[] args) {
-        String[] dna = {"ATGCCA", "AAGTAC", "CTACGT", "AACAGG", "GGCCCA", "TCCATG"};
+       // String[] dna = {"ATGCCA", "AAGTAC", "CTACGT", "AACAGG", "GGCCCA", "TCCATG"};
+        String[] dna = getDna();
 
         //imprime matriz generada
         char[][] matrix = createMatrix(dna);
         printMatrix(dna, matrix);
 
+        //valida el dna ingresado
         boolean mutant = isMutant(dna);
         if (mutant) System.out.println("\n\n:::: MUTANTE DETECTADO ::::");
         else System.out.println("\n\nEste humano no es mutante");
+    }
+
+    /**
+     * @return String
+     * recibe el dna y lo envia como String
+     */
+    private static String[] getDna() {
+        System.out.println("Ingrese secuencia ADN...");
+        Scanner scan = new Scanner(System.in);
+        String inputString = scan.nextLine();
+        scan.close();
+        return inputString.split(",");
     }
 
     /**
@@ -91,16 +107,11 @@ public class Mutant {
                 if (j == 0) continue;
                 if (i == 0) continue;
                 //compara con la posicion superior izquierda
-                if (matrix[i - 1][j - 1] == matrix[i][j]) {
-                    letterCounter++;
-                } else letterCounter = 1;
+                if (matrix[i - 1][j - 1] == matrix[i][j]) letterCounter++; else letterCounter = 1;
                 //compara con la posicion superior derecha
-                if (matrix[i + 1][j - 1] == matrix[i][j]) {
-                    letterCounter++;
-                } else letterCounter = 1;
-
+                //if (matrix[i + 1][j + 1] == matrix[i][j])letterCounter++; else letterCounter = 1;
                 //finaliza como verdadero si hay 4 letras iguales consecutivas
-                if (letterCounter == 3) return true;
+                if (letterCounter == 4) return true;
 
             }
         }
